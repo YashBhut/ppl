@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:ppl/appConstant/textstyle.dart';
 import 'package:ppl/screens/matchCenter/match_center_screen.dart';
 import 'package:ppl/screens/moreDetail/more_detail.dart';

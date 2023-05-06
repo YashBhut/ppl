@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:ppl/appConstant/colorConstant.dart';
 import 'package:ppl/appConstant/textstyle.dart';
 import 'package:ppl/screens/matchCenter/matchCenterDetail/match_center_detail.dart';
 import 'package:ppl/screens/matchCenter/standings/standing_screen.dart';
-import 'package:ppl/screens/splashScreen/splash_screen.dart';
 
 class MatchCenterScreen extends StatefulWidget {
   const MatchCenterScreen({super.key});
