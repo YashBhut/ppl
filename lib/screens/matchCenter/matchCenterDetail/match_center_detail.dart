@@ -29,9 +29,6 @@ class _MatchCenterFDetailScreenState extends State<MatchCenterFDetailScreen> {
 
       setState(() {
         matchsummary = matchesdata;
-
-        // print(
-            // 'awayTeamLogo:::::::${matchsummary.Matchsummary[0].homeTeamLogo.toString()}');
       });
     } catch (e) {
       setState(() {
@@ -79,7 +76,7 @@ class _MatchCenterFDetailScreenState extends State<MatchCenterFDetailScreen> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return InkWell(onTap: () {
-                            Get.to(InningsData(index,matchsummary!.Matchsummary[index]));
+                            Get.to(InningsData(),arguments: matchsummary!.Matchsummary[index]);
                           },child: Matchsummarycontainer(index));
                         },
                       ),
