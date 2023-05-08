@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ppl/screens/matchCenter/matchCenterDetail/model/matchSummaryModel.dart';
 
 import '../../networkConstant/apiProvider.dart';
-import 'model/inning1model.dart';
 
 class InningsData extends StatefulWidget {
   const InningsData( {super.key});
@@ -14,7 +13,7 @@ class InningsData extends StatefulWidget {
 
 class _InningsDataState extends State<InningsData> {
   // MatchSummary? matchsummary;
-  Innings1? inning1;
+  var inningDatas1;
 //  var inning1data;
   getIning1Data() async {
     var apiService = ApiService();
@@ -23,13 +22,13 @@ class _InningsDataState extends State<InningsData> {
       final inning1data = await apiService.getIning1Data(urlIn1: "${argu.inning1}");
 
       setState(() {
-        inning1 = inning1data.innings1;
-        print(inning1);
+           inningDatas1 = inning1data;
+        print('inningDatas1${   inningDatas1}');
         // print('awayTeamLogo:::::::${inning1!.innings1!.battingCard!.PlayerID.toString()}');
       });
     } catch (e) {
       setState(() {
-        inning1 = null;
+        inningDatas1 = null;
       });
     }
   }
@@ -54,8 +53,8 @@ class _InningsDataState extends State<InningsData> {
         body:
             // matchsummary!.Matchsummary.length ==  0 ? Center(child: Text("No Data"),) :
             Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -78,35 +77,40 @@ class _InningsDataState extends State<InningsData> {
                 style: const TextStyle(color: Colors.white),
               ),
             ),
-            inning1 == null
+            inningDatas1 == null
                 ? Center(
                     child: Text('NO DATA'),
                   )
                 : 
-                ListView.builder(
-                    itemCount: inning1!.battingCard!.length,
-                    itemBuilder: (BuildContext context, index) {
-                      print('inning:::::::${inning1!}');
-                      return Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.indigo.shade800,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                              "${inning1!.battingCard![index].againstFast}",
-                              style: const TextStyle(color: Colors.white),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                      itemCount: (inningDatas1['Innings1']['BattingCard']).length,
+                      itemBuilder: (BuildContext context, index) {
+                        // print('inning:::::::${inningDatas1!}');
+                  print('dataurl1:::::${inningDatas1['Innings1']['BattingCard'][index]['PlayerName']}');
+                            
+                        return Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              decoration: BoxDecoration(
+                                  color: Colors.indigo.shade800,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Text(
+                                "${inningDatas1['Innings1']['BattingCard'][index]['PlayerName']}",
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                        ],
-                      );
-                    })
-          ],
-        ),
+                          ],
+                        );
+                      }),
+                )
+                    ],
+                  ),
       ),
     );
   }
